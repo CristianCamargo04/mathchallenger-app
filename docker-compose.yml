@@ -33,9 +33,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   spring-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: cristiancamargo04/mathchallenger-spring-app:latest
     container_name: spring-app-container
     ports:
       - "8080:8080"
