@@ -14,6 +14,11 @@ public class ApplicationProperties {
     @Value("${spring.retry.time}")
     private long springRetryTime;
 
+    @Value("${spring.redis.host}")
+    private String springRedisHost;
+    @Value("${spring.redis.port}")
+    private int springRedisPort;
+
     public String getMockServerUrl() {
         return mockServerUrl;
     }
@@ -28,5 +33,13 @@ public class ApplicationProperties {
 
     public long getSpringRetryTime() {
         return springRetryTime;
+    }
+
+    public String getSpringRedisHost() {
+        return springRedisHost;
+    }
+
+    public int getSpringRedisPort() {
+        return springRedisPort;
     }
 }
