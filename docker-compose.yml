@@ -1,0 +1,64 @@
+version: '3.1'
+
+services:
+
+  cache:
+    image: redis:latest
+    container_name: redis-container
+    hostname: redis
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "6379:6379"
+    networks:
+      - app-net
+    volumes:
+      - redis-data:/data
+
+  db:
+    image: postgres:17
+    container_name: postgres-container
+    environment:
+      POSTGRES_DB: mathchallengedb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5433:5432"
+    networks:
+      - app-net
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spring-app-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - cache
+      - db
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: mathchallengedb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local
+  postgres-data:
+    driver: local

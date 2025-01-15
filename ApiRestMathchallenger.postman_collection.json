@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "73f57649-05ae-4579-bda9-ba1e6d6506a4",
+		"name": "API REST Mathchallenger",
+		"description": "MathChallenger es una API REST desarrollada en Spring Boot con Java 21. Su objetivo es ofrecer servicios relacionados con cálculos matemáticos y manejo de porcentajes. Además, cuenta con soporte para caché, reintentos automáticos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12239674"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/calculate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"num1\": 5,\r\n    \"num2\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/calculate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"calculate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/call-history?page=0&size=10",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/call-history?page=0&size=10",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"call-history"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
